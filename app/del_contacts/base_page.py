@@ -35,6 +35,8 @@ class BasePage:
             ele = self.driver.find_elements(MobileBy.CSS_SELECTOR,value)
         elif type == 'class_name':
             ele = self.driver.find_element(MobileBy.CLASS_NAME,value)
+        elif type == 'id':
+            ele = self.driver.find_element(MobileBy.ID,value)
         return ele
 
     def find_not_exist(self,type,value):

@@ -15,10 +15,10 @@ from selenium.webdriver.support.wait import WebDriverWait
 from app.del_contacts.base_page import BasePage
 
 
+
 class AddressListPage(BasePage):
 
-
-    def del_contact(self):
+    def del_contact(self,keyword):
         """
             删除联系人
         :return: None
@@ -26,7 +26,7 @@ class AddressListPage(BasePage):
     # 点击搜索按钮
         self.find_and_click('id','com.tencent.wework:id/hxw')
     # 输入关键字并搜索
-        self.find_and_input('id','com.tencent.wework:id/ghu','demo2')
+        self.find_and_input('id','com.tencent.wework:id/ghu',keyword)
     # 获取结果并点击
         self.find_and_click('id','com.tencent.wework:id/dkf')
     # 点击编辑按钮
@@ -38,22 +38,13 @@ class AddressListPage(BasePage):
     # 点击确认删除
         self.find_and_click('id','com.tencent.wework:id/bjp')
 
-    def get_del_result(self):
-        # # 元素找到了，返回一个False,有超时就返回一个true
-        # from selenium.common.exceptions import TimeoutException
-        # try:
-        #     self.find('id','com.tencent.wework:id/dkf')
-        #     return False
-        # except TimeoutException:
-        #     return True
-        # self.find_and_input('id', 'com.tencent.wework:id/ghu', 'demo2')
-        loctor = (By.XPATH,'//*[@text="无搜索结果"]')
-        WebDriverWait(self.driver,10).until(expected_conditions.visibility_of_element_located(*loctor))
-        result = self.find('xpath','//*[@text="无搜索结果"]').get_attribute('text')
-        # print(result)
-        return result
+        from app.del_contacts.search_page import SearchPage
+        return SearchPage(self.driver)
 
-
+    def goto_search_page(self):
+        self.find_and_click('id','com.tencent.wework:id/hxw')
+        from app.del_contacts.search_page import SearchPage
+        return SearchPage(self.driver)
 
 
 

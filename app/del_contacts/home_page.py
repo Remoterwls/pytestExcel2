@@ -18,3 +18,5 @@ class HomePage(BasePage):
         self.find_and_click('xpath',"//*[@text='通讯录']")
         return AddressListPage(self.driver)
 
+
+
